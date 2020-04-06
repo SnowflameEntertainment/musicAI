@@ -1,17 +1,32 @@
+print("Started\nImporting")
+print("numpy")
 import numpy
+print("glob")
 import glob
+print("pickle")
 import pickle
+print("music21")
 from music21 import converter, instrument, note, chord
+print("keras.modls Sequential")
 from keras.models import Sequential
+print("keras.layers Dense")
 from keras.layers import Dense
+print("keras Dropout")
 from keras.layers import Dropout
+print("keras LSTM")
 from keras.layers import LSTM
+print("keras Activation")
 from keras.layers import Activation
+print("keras BatchNormalization")
 from keras.layers import BatchNormalization as BatchNorm
+print("keras.utils np_utils")
 from keras.utils import np_utils
+print("keras.callbacks ModelCheckpoint")
 from keras.callbacks import ModelCheckpoint
+print("Done Importing")
 
 
+print("defining trainNetwork")
 def trainNetwork():
     #Trains the AI
     notes = get_notes()
@@ -25,6 +40,7 @@ def trainNetwork():
 
     train(model, network_input, network_output)
 
+print("defining get_notes")
 def get_notes():
     notes = []
 
@@ -53,8 +69,8 @@ def get_notes():
 
     return notes
 
-
-def   prepare_sequences(notes, n_vocab):
+print("defining prepare_sequences")
+def prepare_sequences(notes, n_vocab):
     sequence_length = 100
 
     pitchnames = sorted(set(item for item in notes))
@@ -76,7 +92,7 @@ def   prepare_sequences(notes, n_vocab):
 
     return (network_input, network_output)
 
-
+print("defining create_network")
 def create_network(network_input, n_vocab):
     model = Sequential()
     model.add(LSTM(
@@ -99,7 +115,7 @@ def create_network(network_input, n_vocab):
 
     return model
 
-
+print("defining train")
 def train(model, network_input, network_output):
     filepath = "weights-improvement-{epoch:02d}-{loss:4f}-bigger.hdf5"
     checkpoint = ModelCheckpoint(
@@ -114,6 +130,7 @@ def train(model, network_input, network_output):
 
     model.fit(netowrk_input, network_output, epochs=200, batch_size=128, callbacks=callbacks_list)
 
-
+print("done defining")
 if __name__ == '__main__':
+    print("running")
     train_netowrk()
